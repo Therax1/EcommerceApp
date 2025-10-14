@@ -10,13 +10,17 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "", 
-    database: "EcomApp"
+    database: "ecomapp"
 });
 
 // Signup endpoint
 app.post('/inscription', (req, res) => {
+    
+    console.log("Données reçues:", req.body); // Ajoute cette ligne
     const { name, email, password } = req.body;
-    const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+    console.log("Name:", name, "Email:", email); // Et cette ligne
+
+    const sql = "INSERT INTO users (noms, email, mot_de_passe) VALUES (?, ?, ?)";
     const values = [name, email, password]; // Destructure directly here
 
     db.query(sql, values, (err, result) => {
@@ -30,7 +34,7 @@ app.post('/inscription', (req, res) => {
 });
 
 app.post('/connexion', (req, res) => {
-    const sql = "SELECT * FROM users WHERE `email` = ? AND `password` = ?";
+    const sql = "SELECT * FROM users WHERE `email` = ? AND `mot_de_passe` = ?";
     db.query(sql, [req.body.email,req.body.password], (err, data) => {
         if (err) {
             return res.json("Error");
