@@ -4,8 +4,10 @@ import Victus_ThirdPhoto from '../assets/img/ProductCard/VictusImageThree.jpg'
 import Victus_FourthPhoto from '../assets/img/ProductCard/VictusImageFour.jpg'
 import Stars from '../assets/img/ProductCard/stars.png'
 
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 
 export default function ProductsCard(){
     return(
@@ -117,9 +119,24 @@ export default function ProductsCard(){
                                     <span className="font-medium text-gray-900">Share :</span>
                                     <a 
                                         href="#" 
-                                        className="text-amber-600 hover:text-amber-700 underline transition-colors"
+                                        className="text-blue-600 hover:text-blue-700 underline transition-colors"
+                                        rel='noopener noreferrer'
                                     >
-                                        Partager ce produit
+                                        <FontAwesomeIcon icon={faFacebook}/>
+                                    </a>
+                                    <a 
+                                        href="#" 
+                                        className="text-red-600 hover:text-red-700 underline transition-colors"
+                                        rel='noopener noreferrer'
+                                    >
+                                        <FontAwesomeIcon icon={faInstagram}/>
+                                    </a>
+                                    <a 
+                                        href="#" 
+                                        className="text-green-600 hover:text-green-700 underline transition-colors"
+                                        rel='noopener noreferrer'
+                                    >
+                                        <FontAwesomeIcon icon={faWhatsapp}/>
                                     </a>
                                 </li>
                             </ul>
