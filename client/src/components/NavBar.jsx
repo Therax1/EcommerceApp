@@ -1,4 +1,4 @@
-import { faUser, faBars, faTimes, faSearch } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faTimes, faSearch, faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 
@@ -103,7 +103,7 @@ export default function NavBar() {
                             aria-label="User Account"
                             className="p-2 text-gray-700 hover:text-amber-600 transition-colors"
                         >
-                            <FontAwesomeIcon icon={faUser} className="w-5 h-5" />
+                            <FontAwesomeIcon icon={faCartShopping} className="w-5 h-5" />
                         </a>
                     </div>
 
@@ -114,7 +114,7 @@ export default function NavBar() {
                             aria-label="User Account"
                             className="p-2 text-gray-700 hover:text-amber-600 transition-colors"
                         >
-                            <FontAwesomeIcon icon={faUser} className="w-5 h-5" />
+                            <FontAwesomeIcon icon={faCartShopping} className="w-5 h-5" />
                         </a>
                         <button
                             onClick={toggleMenu}
@@ -168,6 +168,19 @@ export default function NavBar() {
                                 Contact
                             </a>
                         </li>
+                        {/* A voir demain mais je tenais à commit pour ne pas abandonner la journey  */}
+                        {/* <li>
+                            <a 
+                                href="#" 
+                                aria-label="User Account"
+                                className="block px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
+                            >
+                                <div className="flex items-center gap-2  ">
+                                    <FontAwesomeIcon icon={faUser} className="w-5 h-5" />
+                                    Account
+                                </div>
+                            </a>
+                        </li> */}
                         <li className="pt-2 border-t border-gray-200">
                             <div className="px-4 py-2">
                                 <div className="flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
