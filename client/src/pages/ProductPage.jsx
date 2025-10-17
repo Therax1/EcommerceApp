@@ -1,13 +1,15 @@
 import NavBar from "../components/NavBar"
-import ProductsCard from "../components/ProductsCard"
+import ProductCard from "../components/ProductCard"
 import ProductAddtionnalInfos from "../components/ProductAdditionnalInfosSection"
 import RelatedProductSection from "../components/RelatedProductSection"
 import Footer from "../components/Footer"
-export default function Shop(){
+
+export default function ProductPage(){
     return(
         <>
             <NavBar/>
-            <ProductsCard/>
+            
+            <ProductCard/>
             <ProductAddtionnalInfos/>
             <RelatedProductSection />
             <Footer />

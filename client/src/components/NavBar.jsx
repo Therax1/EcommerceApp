@@ -1,129 +1,83 @@
 import { faBars, faTimes, faSearch, faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "react-router-dom"
 import { useState } from "react"
+import CartPopUp from "./CartPopUp"
 
 export default function NavBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [isCartOpen, setIsCartOpen] = useState(false)
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-    const toggleSearch = () => setIsSearchOpen(!isSearchOpen)
+    const toggleCart = () => setIsCartOpen(!isCartOpen)
 
     return(
-        <nav className="bg-white shadow-md sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="bg-[#10121a] shadow-md sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-2">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0">
-                        <a 
-                            href="#" 
+                        <Link 
+                            to="/" 
                             aria-label="Homepage"
-                            className="text-2xl font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                            className="hidden md:block text-2xl font-bold text-white"
                         >
-                            Logo
-                        </a>
+                            Chez Diallo
+                        </Link>
                     </div>
 
-                    {/* Navigation Links - Desktop */}
-                    <ul className="hidden md:flex items-center space-x-8">
-                        <li>
-                            <a 
-                                href="" 
-                                className="text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-amber-600 after:transition-all hover:after:w-full"
+                    {/* Search Button/Bar */}
+                    <div className="relative w-[75%]">         
+                        <div className="flex w-full h-full items-center gap-0 bg-gray-100 rounded-lg overflow-hidden">
+                            <input 
+                                type="search" 
+                                placeholder="Search..."
+                                className="bg-gray-10 px-4 w-[95%] outline-none  h-11 placeholder-gray-500 "
+                                autoFocus
+                            />
+                            <button 
+                                type="submit"
+                                className="bg-amber-400 mx-auto grow h-12 p-3 text-black outline-none cursor-pointer focus:ring-2 focus:ring-amber hover:bg-amber-500 font-medium transition-colors"
                             >
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="" 
-                                className="text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-amber-600 after:transition-all hover:after:w-full"
-                            >
-                                Products
-                            </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="" 
-                                className="text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-amber-600 after:transition-all hover:after:w-full"
-                            >
-                                About
-                            </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="" 
-                                className="text-gray-700 hover:text-amber-600 font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-amber-600 after:transition-all hover:after:w-full"
-                            >
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
-
-                    {/* Actions - Search & User */}
-                    <div className="hidden md:flex items-center space-x-4">
-                        {/* Search Button/Bar */}
-                        <div className="relative">
-                            {!isSearchOpen ? (
-                                <button
-                                    onClick={toggleSearch}
-                                    className="p-2 text-gray-700 hover:text-amber-600 transition-colors"
-                                    aria-label="Open search"
-                                >
-                                    <FontAwesomeIcon icon={faSearch} className="w-5 h-5" />
-                                </button>
-                            ) : (
-                                <div className="flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
-                                    <input 
-                                        type="search" 
-                                        placeholder="Search..."
-                                        className="bg-transparent outline-none text-gray-700 placeholder-gray-500 w-48"
-                                        autoFocus
-                                    />
-                                    <button 
-                                        type="submit"
-                                        className="text-amber-600 hover:text-amber-700 font-medium transition-colors"
-                                    >
-                                        <FontAwesomeIcon icon={faSearch} />
-                                    </button>
-                                    <button
-                                        onClick={toggleSearch}
-                                        className="text-gray-500 hover:text-gray-700 transition-colors"
-                                        aria-label="Close search"
-                                    >
-                                        <FontAwesomeIcon icon={faTimes} />
-                                    </button>
-                                </div>
-                            )}
+                                <FontAwesomeIcon className=" text-xl" icon={faSearch} />
+                            </button>
                         </div>
+                    </div>
 
-                        {/* User Icon */}
-                        <a 
-                            href="#" 
-                            aria-label="User Account"
-                            className="p-2 text-gray-700 hover:text-amber-600 transition-colors"
+                    {/* Cart Icon */}
+                        <button 
+                            onClick={toggleCart}
+                            aria-label="Open shopping cart"
+                            className="p-2 text-white text-3xl hidden md:block hover:text-amber-400 transition-colors relative"
                         >
                             <FontAwesomeIcon icon={faCartShopping} className="w-5 h-5" />
-                        </a>
-                    </div>
+                            {/* Badge optionnel pour afficher le nombre d'articles */}
+                            <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                                2
+                            </span>
+                        </button>
 
                     {/* Mobile Menu Button */}
                     <div className="md:hidden flex items-center space-x-3">
-                        <a 
-                            href="#" 
-                            aria-label="User Account"
-                            className="p-2 text-gray-700 hover:text-amber-600 transition-colors"
+                        <button 
+                            onClick={toggleCart}
+                            aria-label="Open shopping cart"
+                            className="p-2 text-white text-3xl hover:text-amber-400 transition-colors relative"
                         >
                             <FontAwesomeIcon icon={faCartShopping} className="w-5 h-5" />
-                        </a>
+                            {/* Badge pour mobile */}
+                            <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                                2
+                            </span>
+                        </button>
                         <button
                             onClick={toggleMenu}
-                            className="p-2 text-gray-700 hover:text-amber-600 transition-colors"
+                            className="p-2 text-white "
                             aria-label="Toggle menu"
                         >
                             <FontAwesomeIcon 
                                 icon={isMenuOpen ? faTimes : faBars} 
-                                className="w-6 h-6"
+                                className="w-6 h-6 text-3xl"
                             />
                         </button>
                     </div>
@@ -135,72 +89,58 @@ export default function NavBar() {
                         isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                 >
-                    <ul className="pb-4 space-y-2">
+                    <ul className="pb-4 space-y-2 text-white">
                         <li>
-                            <a 
-                                href="" 
-                                className="block px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
+                            <Link 
+                                to={"/"}
+                                className="block px-4 py-2 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
                             >
                                 Home
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a 
-                                href="" 
-                                className="block px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
+                            <Link 
+                                to="/products"
+                                className="block px-4 py-2 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
                             >
                                 Products
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a 
-                                href="" 
-                                className="block px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
+                            <Link 
+                                to="/about" 
+                                className="block px-4 py-2 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
                             >
                                 About
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a 
-                                href="" 
-                                className="block px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
+                            <Link 
+                                to="/contact" 
+                                className="block px-4 py-2 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
                             >
                                 Contact
-                            </a>
+                            </Link>
                         </li>
-                        {/* A voir demain mais je tenais à commit pour ne pas abandonner la journey  */}
-                        {/* <li>
-                            <a 
-                                href="#" 
-                                aria-label="User Account"
-                                className="block px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-600 rounded-lg transition-colors"
+                        
+                        <li className="pt-2 border-t flex flex-col items-start border-gray-200">
+                            <Link
+                                to="/inscription"
+                                className="block px-4 py-2 rounded-lg bg-gray-500 font-semibold"
                             >
-                                <div className="flex items-center gap-2  ">
-                                    <FontAwesomeIcon icon={faUser} className="w-5 h-5" />
-                                    Account
-                                </div>
-                            </a>
-                        </li> */}
-                        <li className="pt-2 border-t border-gray-200">
-                            <div className="px-4 py-2">
-                                <div className="flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
-                                    <input 
-                                        type="search" 
-                                        placeholder="Search..."
-                                        className="bg-transparent outline-none text-gray-700 placeholder-gray-500 w-full"
-                                    />
-                                    <button 
-                                        type="submit"
-                                        className="text-amber-600 hover:text-amber-700 font-medium transition-colors"
-                                    >
-                                        <FontAwesomeIcon icon={faSearch} />
-                                    </button>
-                                </div>
-                            </div>
+                                Inscription
+                            </Link>
                         </li>
                     </ul>
                 </div>
             </div>
+
+            {/* Cart Popup */}
+            <CartPopUp 
+                isOpen={isCartOpen} 
+                onClose={() => setIsCartOpen(false)}
+                cartItems={[]}
+            />
         </nav>
     )
 }

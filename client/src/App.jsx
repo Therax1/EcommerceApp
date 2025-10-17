@@ -1,14 +1,16 @@
 import { Routes, Route } from 'react-router-dom'
 import Connexion from './auth/Connexion'
 import Inscription from './auth/Inscription'
-import Shop from './pages/Shop'
+import ProductPage from './pages/ProductPage'
+import NavBar from './components/NavBar'
 
 export default function App() {
     return(
         <Routes>
             
+            <Route path='/' element={ <NavBar/> } />
             <Route path='/inscription' element={ <Inscription/> } />
-            <Route path='/product' element={ <Shop/> } />
+            <Route path='/productid' element={ <ProductPage/> } />
             <Route path='/connexion' element={ <Connexion/> } />
         </Routes>
     )

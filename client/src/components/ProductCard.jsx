@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 
-export default function ProductsCard(){
+export default function ProductCard(){
     return(
         <section className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
