@@ -2,23 +2,36 @@ import { Link, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faHome } from '@fortawesome/free-solid-svg-icons'
 
+/**
+ * Fil d'Ariane qui affiche le chemin de navigation à partir de l'URL courante.
+ *
+ * - Affiche toujours un lien pour l'accueil puis chaque segment de l'URL (les segments intermédiaires sont cliquables, le dernier est du texte simple).
+ * - Accessibilité: <nav aria-label="Breadcrumb"> et liste ordonnée.
+ * - Style avec Tailwind CSS (espacements, couleurs, responsive).
+ *
+ * @returns {JSX.Element} Fil d'Ariane correspondant à la route active.
+ * @example
+ * 
+ * <Breadcrumb />
+ */
+
 export default function Breadcrumb() {
-    // Récupère l'URL actuelle (ex: /shop/product/123)
+    // Récupération de l'URL actuelle
     const location = useLocation()
 
-    // Divise le chemin en segments et filtre les vides
-    // Ex: "/shop/product" → ["shop", "product"]
+    // Retourne un tableau de segments de chemin (String) et filtre les vides
     const pathSegments = location.pathname
         .split('/')
         .filter(segment => segment !== '')
 
-    // Fonction pour formater le nom affiché (capitalize)
+
+    // Fonction pour formater le nom affiché (Première lettre en majuscule)
     const formatName = (name) => {
         return name.charAt(0).toUpperCase() + name.slice(1)
     }
 
     // Fonction pour construire le chemin complet jusqu'à un segment
-    // Ex: index=1 pour "product" → "/shop/product"
+    // Pour l'utilisation dans les liens générés
     const buildPath = (index) => {
         return '/' + pathSegments.slice(0, index + 1).join('/')
     }
@@ -30,7 +43,7 @@ export default function Breadcrumb() {
         >
             <div className="max-w-7xl mx-auto">
                 <ol className="flex items-center flex-wrap gap-2 text-sm md:text-base">
-                    {/* Lien Home (toujours présent) */}
+                    {/* Lien vers l'accueil (toujours présent) */}
                     <li className="flex items-center gap-2">
                         <Link 
                             to="/" 
@@ -54,7 +67,7 @@ export default function Breadcrumb() {
 
                         return (
                             <li key={path} className="flex items-center gap-2">
-                                {/* Si c'est le dernier segment, pas de lien (page actuelle) */}
+                                {/* Si c'est le dernier segment, pas de lien (car c'est la page actuelle) */}
                                 {isLast ? (
                                     <span className="text-gray-900 font-semibold">
                                         {formatName(segment)}
