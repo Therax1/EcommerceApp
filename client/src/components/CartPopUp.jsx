@@ -170,13 +170,6 @@ export default function CartPopUp({ isOpen, onClose, cartItems = [] }) {
                         >
                             Checkout
                         </Link>
-                        <Link 
-                            to="/comparison"
-                            onClick={onClose}
-                            className="flex-1 py-2.5 border-2 border-gray-900 text-gray-900 font-semibold rounded-full hover:bg-gray-900 hover:text-white transition-colors text-center"
-                        >
-                            Comparison
-                        </Link>
                     </div>
                 </div>
             </div>
