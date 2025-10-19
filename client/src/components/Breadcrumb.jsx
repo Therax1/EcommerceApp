@@ -39,7 +39,7 @@ export default function Breadcrumb() {
     return (
         <nav 
             aria-label="Breadcrumb" 
-            className="bg-gray-50 py-6 px-4"
+            className="bg-gray-300 py-6 px-4"
         >
             <div className="max-w-7xl mx-auto">
                 <ol className="flex items-center flex-wrap gap-2 text-sm md:text-base">

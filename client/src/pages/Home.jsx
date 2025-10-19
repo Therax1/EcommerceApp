@@ -1,11 +1,14 @@
 import NavBar from "../components/NavBar"
-import Breadcrumb from "../components/Breadcrumb"
-
+import Footer from "../components/Footer"
+import HeroSection from "../components/HeroSection"
+import OurCategories from "../components/OurCategories"
 export default function Home(){
     return(
         <>
             <NavBar />
-            <Breadcrumb />
+            <HeroSection />
+            <OurCategories />
+            <Footer />
         </>
     )
 }
