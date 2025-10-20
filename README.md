@@ -298,7 +298,7 @@ MIT License
 
 ## 🙏 Remerciements
 
-- Design inspiré de Amazon & Shopify
+- Design inspiré de Amazon & [UI-UX Expert (Aashifa)](https://www.figma.com/design/JNBm8caj0HuZOdjdXOtbOK/eCommerce-Website-%7C-Web-Page-Design-%7C-UI-KIT-%7C-Interior-Landing-Page--Community-?node-id=117-960&p=f&t=1L19QOuZu8wFXUFG-0)
 - Icons : FontAwesome
 - CSS : Tailwind CSS
 - Build : Vite
