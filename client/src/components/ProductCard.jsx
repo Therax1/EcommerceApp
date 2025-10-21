@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Victus_FirstPhoto from '../assets/img/ProductCard/VictusImageOne.jpg'
 import Victus_SecondPhoto from '../assets/img/ProductCard/VictusImageTwo.jpg'
 import Victus_ThirdPhoto from '../assets/img/ProductCard/VictusImageThree.jpg'
@@ -8,8 +9,51 @@ import Stars from '../assets/img/ProductCard/stars.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
+import { useCart } from '../context/CartContext'
 
 export default function ProductCard(){
+    // État local pour la quantité
+    const [quantity, setQuantity] = useState(1)
+    
+    // Récupérer la fonction addToCart du contexte
+    const { addToCart } = useCart()
+    
+    // Données du produit (à remplacer par les vraies données via props)
+    const product = {
+        id: 1,
+        name: "Product Title",
+        price: 150000.00,
+        image: Victus_FirstPhoto
+    }
+    
+    // Gérer l'incrémentation de la quantité
+    const incrementQuantity = () => {
+        setQuantity(prev => prev + 1)
+    }
+    
+    // Gérer la décrémentation de la quantité
+    const decrementQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(prev => prev - 1)
+        }
+    }
+    
+    // Gérer l'ajout au panier
+    const handleAddToCart = () => {
+        // Ajouter le produit avec la quantité sélectionnée
+        const productToAdd = {
+            ...product,
+            quantity: quantity
+        }
+        
+        addToCart(productToAdd)
+        
+        // Réinitialiser la quantité à 1 après l'ajout
+        setQuantity(1)
+        
+        // Notification visuelle (optionnel)
+        alert(`${quantity} article(s) ajouté(s) au panier !`)
+    }
     return(
         <section className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
@@ -87,15 +131,18 @@ export default function ProductCard(){
                             {/* Compteur de quantité */}
                             <div className="flex items-center border-2 border-gray-300 rounded-lg overflow-hidden w-full sm:w-auto">
                                 <button 
-                                    className="px-4 py-3 hover:bg-gray-100 transition-colors active:bg-gray-200"
+                                    onClick={decrementQuantity}
+                                    className="px-4 py-3 hover:bg-gray-100 transition-colors active:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
                                     aria-label="Diminuer la quantité"
+                                    disabled={quantity <= 1}
                                 >
                                     <FontAwesomeIcon icon={faChevronLeft} className="text-gray-600" />
                                 </button>
                                 <p className="px-6 py-3 font-medium text-gray-900 min-w-[3rem] text-center border-x-2 border-gray-300">
-                                    1
+                                    {quantity}
                                 </p>
                                 <button 
+                                    onClick={incrementQuantity}
                                     className="px-4 py-3 hover:bg-gray-100 transition-colors active:bg-gray-200"
                                     aria-label="Augmenter la quantité"
                                 >
@@ -104,7 +151,10 @@ export default function ProductCard(){
                             </div>
 
                             {/* Bouton Ajouter au panier */}
-                            <button className="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg active:scale-[0.98] text-sm md:text-base">
+                            <button 
+                                onClick={handleAddToCart}
+                                className="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg active:scale-[0.98] text-sm md:text-base"
+                            >
                                 Add to Cart
                             </button>
                         </div>

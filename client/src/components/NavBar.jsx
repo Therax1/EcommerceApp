@@ -3,11 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import CartPopUp from "./CartPopUp"
+import { useCart } from "../context/CartContext"
 
 export default function NavBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isCartOpen, setIsCartOpen] = useState(false)
     const [isSearchFocused, setIsSearchFocused] = useState(false)
+    
+    // Récupérer le nombre d'articles dans le panier depuis le contexte
+    const { getCartCount } = useCart()
+    const cartCount = getCartCount()
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
     const toggleCart = () => setIsCartOpen(!isCartOpen)
@@ -78,9 +83,11 @@ export default function NavBar() {
                         className={`p-2 text-white text-3xl hidden md:block hover:text-amber-400 transition-all duration-300 relative`}
                     >
                         <FontAwesomeIcon icon={faCartShopping} className="w-5 h-5" />
-                        <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
-                            2
-                        </span>
+                        {cartCount > 0 && (
+                            <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                                {cartCount}
+                            </span>
+                        )}
                     </button>
 
                     {/* Mobile Menu Button - caché quand recherche active */}
@@ -93,9 +100,11 @@ export default function NavBar() {
                             className="p-2 text-white text-3xl hover:text-amber-400 transition-colors relative"
                         >
                             <FontAwesomeIcon icon={faCartShopping} className="w-5 h-5" />
-                            <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
-                                2
-                            </span>
+                            {cartCount > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                                    {cartCount}
+                                </span>
+                            )}
                         </button>
                         <button
                             onClick={toggleMenu}
