@@ -81,6 +81,7 @@ export default function ProductCard(){
                             Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.
                         </p>
 
+
                         {/* Sélection de quantité et Ajout au panier */}
                         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                             {/* Compteur de quantité */}
@@ -107,6 +108,7 @@ export default function ProductCard(){
                                 Add to Cart
                             </button>
                         </div>
+
 
                         {/* Métadonnées du produit */}
                         <div className="border-t border-gray-200 pt-6 mt-4">
