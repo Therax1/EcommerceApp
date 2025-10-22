@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt, faPhone, faClock } from '@fortawesome/free-solid-svg-icons'
+import { 
+    faMapMarkerAlt, // faMapMarkerAlt : Icone pour l'adresse physique
+    faPhone, // faPhone : Icone pour le téléphone
+    faClock // faClock : Icone pour les horaires
+} from '@fortawesome/free-solid-svg-icons'
+
 
 /**
  * Composant ContactForm - Formulaire de contact avec informations de l'entreprise
@@ -10,6 +15,7 @@ import { faMapMarkerAlt, faPhone, faClock } from '@fortawesome/free-solid-svg-ic
  * 
  * @returns {JSX.Element} Section de contact complète
  */
+
 export default function ContactForm() {
     const [formData, setFormData] = useState({
         name: '',
@@ -37,7 +43,7 @@ export default function ContactForm() {
         }
     }
 
-    // Validation du formulaire
+    // Validation niveau client du formulaire
     const validate = () => {
         const newErrors = {}
 
@@ -58,7 +64,7 @@ export default function ContactForm() {
         return newErrors
     }
 
-    // Soumission du formulaire
+    // Gestion de la soumission du formulaire
     const handleSubmit = (e) => {
         e.preventDefault()
         
@@ -71,7 +77,8 @@ export default function ContactForm() {
 
         setIsSubmitting(true)
 
-        // Simulation d'envoi (à remplacer par un vrai appel API)
+        // Simulation d'envoi 
+        // TODO: Remplacer par un vrai appel API backend
         setTimeout(() => {
             console.log('Form submitted:', formData)
             alert('Message envoyé avec succès !')
