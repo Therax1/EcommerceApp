@@ -1,82 +1,82 @@
-import ArrierePlan from '../assets/img/auth/ArrierePlan_Main.jpg'
 import AuthInput from '../components/AuthInput'
-import Google from '../assets/img/auth/icons8-google.svg'
 import { Link } from 'react-router-dom'
 
 export default function Connexion() {
     
 
     return (
-        <div 
-            className="luminositeFaible min-h-screen flex justify-center items-center bg-center bg-cover p-3"
-            style={{ backgroundImage: `url(${ArrierePlan})` }}
-        >
-            <form 
-                className="bg-[#ffffff22] px-6 py-10 text-center flex flex-col gap-6 rounded-lg backdrop-blur-xs shadow-xl w-full max-w-lg"
-            >
-                <h3 className="text-3xl font-semibold text-[#ffffffd9] md:text-4xl">
-                    Connectez-vous
-                </h3>
-
-                <div className='flex flex-col gap-4'>
-                    <AuthInput
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Email :"
-                    />
-                    <AuthInput 
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Mot de passe :"
-                    />
+        <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+            <div className="w-full max-w-md">
+                {/* Logo ou titre du site */}
+                <div className="text-center mb-6">
+                    <h1 className="text-4xl font-bold text-gray-800 mb-2">WestAf</h1>
+                    <p className="text-gray-600">E-Commerce</p>
                 </div>
 
-                {/* Lien mot de passe oublié */}
-                <div className="text-right">
-                    <Link 
-                        to="/mot-de-passe-oublie" 
-                        className={`text-[#ffffff] text-sm underline hover:text-[#eeeeee]`}
-                    >
-                        Mot de passe oublié ?
-                    </Link>
+                {/* Formulaire de connexion */}
+                <div className="bg-white border border-gray-300 rounded-lg p-8">
+                    <h2 className="text-2xl font-normal mb-6">Se connecter</h2>
+
+                    <form className="flex flex-col gap-4">
+                        {/* Email */}
+                        <div>
+                            <label htmlFor="email" className="block text-sm font-bold mb-1">
+                                Email
+                            </label>
+                            <AuthInput
+                                type="email"
+                                name="email"
+                                id="email"
+                                placeholder=""
+                            />
+                        </div>
+
+                        {/* Mot de passe */}
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-bold mb-1">
+                                Mot de passe
+                            </label>
+                            <AuthInput 
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder=""
+                            />
+                        </div>
+
+                        {/* Mot de passe oublié */}
+                        <div className="text-right">
+                            <Link 
+                                to="/mot-de-passe-oublie" 
+                                className="text-sm text-blue-600 hover:text-amber-600 hover:underline"
+                            >
+                                Mot de passe oublié ?
+                            </Link>
+                        </div>
+
+                        {/* Bouton Se connecter */}
+                        <button
+                            type="submit"
+                            className="w-full py-2 bg-gradient-to-b from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 rounded-md text-sm font-medium transition-all duration-200 border border-amber-600 mt-2"
+                        >
+                            Se connecter
+                        </button>
+                    </form>
                 </div>
-
-                {/* Bouton Submit */}
-                <button
-                    type="submit"
-                    className={`py-3 bg-[#000000e9] text-white rounded-md text-lg font-bold hover:bg-[#000000] transition-colors duration-200 md:text-xl md:py-4`}
-                >
-                    Se connecter
-                </button>
-
-                <div className='bg-gray-200 h-[1px] w-[90%] self-center'></div>
-
-                {/* Bouton Google */}
-                <button
-                    type="button"
-                    className={`py-3 px-5 bg-[#000000e9] text-white rounded-full flex items-center justify-center font-medium gap-4 hover:bg-[#000000] transition-colors duration-200 md:text-lg md:py-4`}
-                >
-                    <img 
-                        className="w-9" 
-                        src={Google} 
-                        alt="Icone de Google" 
-                    />
-                    Se connecter avec Google 
-                </button>
 
                 {/* Lien vers inscription */}
-                <p className="text-[#ffffffcc] mt-4">
-                    Pas encore de compte ?{' '}
-                    <Link 
-                        to="/inscription" 
-                        className={`text-[#ffffff] font-semibold underline hover:text-[#eeeeee]`}
-                    >
-                        Inscrivez-vous
-                    </Link>
-                </p>
-            </form>
+                <div className="mt-6 text-center">
+                    <p className="text-sm text-gray-600">
+                        Pas encore de compte ?{' '}
+                        <Link 
+                            to="/inscription" 
+                            className="text-blue-600 hover:text-amber-600 hover:underline font-medium"
+                        >
+                            Créer un compte
+                        </Link>
+                    </p>
+                </div>
+            </div>
         </div>        
     )
 }
