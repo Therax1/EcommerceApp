@@ -2,16 +2,20 @@ import RelatedProductOne from '../assets/img/ProductCard/RelatedProduct_One.jpg'
 import RelatedProductTwo from '../assets/img/ProductCard/RelatedProduct_Two.jpg'
 import RelatedProductThree from '../assets/img/ProductCard/RelatedProduct_Three.jpg'
 import RelatedProductFour from '../assets/img/ProductCard/RelatedProduct_Four.jpg'
+import { useCart } from '../context/CartContext'
 
 export default function RelatedProductSection() {
+    // Récupérer la fonction addToCart du contexte
+    const { addToCart } = useCart()
+    
     // Données des produits connexes
     const relatedProducts = [
         {
             id: 1,
             name: "Syltherine",
             description: "Stylish cafe chair",
-            price: "XOF 2.500.000",
-            oldPrice: "XOF 3.500.000",
+            price: 2500000,
+            oldPrice: 3500000,
             image: RelatedProductOne,
             discount: "-30%",
             badge: "discount"
@@ -20,7 +24,7 @@ export default function RelatedProductSection() {
             id: 2,
             name: "Leviosa",
             description: "Stylish cafe chair",
-            price: "XOF 2.500.000",
+            price: 2500000,
             oldPrice: null,
             image: RelatedProductTwo,
             discount: null,
@@ -30,8 +34,8 @@ export default function RelatedProductSection() {
             id: 3,
             name: "Lolito",
             description: "Luxury big sofa",
-            price: "XOF 7.000.000",
-            oldPrice: "XOF 14.000.000",
+            price: 7000000,
+            oldPrice: 14000000,
             image: RelatedProductThree,
             discount: "-50%",
             badge: "discount"
@@ -40,13 +44,32 @@ export default function RelatedProductSection() {
             id: 4,
             name: "Respira",
             description: "Outdoor bar table and stool",
-            price: "XOF 500.000",
+            price: 500000,
             oldPrice: null,
             image: RelatedProductFour,
             discount: null,
             badge: "new"
         }
     ]
+    
+    // Fonction pour ajouter au panier
+    const handleAddToCart = (product) => {
+        const productToAdd = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        }
+        
+        addToCart(productToAdd)
+        alert(`${product.name} ajouté au panier !`)
+    }
+    
+    // Fonction pour formater le prix
+    const formatPrice = (price) => {
+        return `XOF ${price.toLocaleString('fr-FR')}`
+    }
 
     return (
         <section className="w-full max-w-7xl mx-auto px-4 py-12 md:py-16">
@@ -87,7 +110,10 @@ export default function RelatedProductSection() {
                             {/* Overlay au hover avec boutons */}
                             <div className="absolute inset-0 backdrop-blur-xs bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                                 <div className="space-y-3">
-                                    <button className="w-full px-8 py-3 bg-white text-amber-600 font-semibold rounded-lg hover:bg-amber-50 transition-colors">
+                                    <button 
+                                        onClick={() => handleAddToCart(product)}
+                                        className="w-full px-8 py-3 bg-white text-amber-600 font-semibold rounded-lg hover:bg-amber-50 transition-colors"
+                                    >
                                         Add to cart
                                     </button>
                                     <div className="flex items-center justify-center gap-4 text-white text-sm">
@@ -118,11 +144,11 @@ export default function RelatedProductSection() {
                             </p>
                             <div className="flex items-center gap-3 pt-2">
                                 <span className="text-lg font-semibold text-gray-900">
-                                    {product.price}
+                                    {formatPrice(product.price)}
                                 </span>
                                 {product.oldPrice && (
                                     <span className="text-sm text-gray-400 line-through">
-                                        {product.oldPrice}
+                                        {formatPrice(product.oldPrice)}
                                     </span>
                                 )}
                             </div>

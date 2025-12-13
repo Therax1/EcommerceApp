@@ -5,10 +5,8 @@ import OurCategories from "../components/OurCategories"
 export default function Home(){
     return(
         <>
-            <NavBar />
             <HeroSection />
             <OurCategories />
-            <Footer />
         </>
     )
 }

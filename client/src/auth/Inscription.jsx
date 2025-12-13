@@ -1,95 +1,118 @@
-import ArrierePlan from '../assets/img/auth/ArrierePlan_Main.jpg'
 import AuthInput from '../components/AuthInput'
-import Google from '../assets/img/auth/icons8-google.svg'
 import { Link } from 'react-router-dom'
 
 export default function Inscription() {
     
 
     return (
-        <div 
-            className="luminositeFaible min-h-screen flex justify-center items-center bg-center bg-cover p-3"
-            style={{ backgroundImage: `url(${ArrierePlan})` }}
-        >
-            <form 
-                className="bg-[#ffffff22] px-6 py-10 text-center flex flex-col gap-6 rounded-lg backdrop-blur-xs shadow-xl w-full max-w-lg"
-            >
-                <h3 className="text-3xl font-semibold text-[#ffffffd9] md:text-4xl">
-                    Inscrivez-vous
-                </h3>
-
-                <div className='flex flex-col gap-4'>
-                    <AuthInput
-                        type="text"
-                        name="nomprenom"
-                        id="nomprenom"
-                        placeholder="Nom et Prénoms :"
-                    />
-                    <AuthInput
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Email :"
-                    />
-                    <AuthInput 
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Mot de passe :"
-                    />
-                    <AuthInput 
-                        type="password"
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        placeholder="Confirmer le mot de passe :"
-                    />
+        <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+            <div className="w-full max-w-md">
+                {/* Logo ou titre du site */}
+                <div className="text-center mb-6">
+                    <h1 className="text-4xl font-bold text-gray-800 mb-2">WestAf</h1>
+                    <p className="text-gray-600">E-Commerce</p>
                 </div>
 
-                {/* Lien vers les CGU */}
-                <div className="text-sm text-[#ffffffcc]">
-                    <label className="flex items-center justify-center gap-2">
-                        <input 
-                            type="checkbox" 
-                            required 
-                        />
-                        J'accepte les <a href="#" className="text-[#ffffff] underline">conditions d'utilisation</a>
-                    </label>
+                {/* Formulaire d'inscription */}
+                <div className="bg-white border border-gray-300 rounded-lg p-8">
+                    <h2 className="text-2xl font-normal mb-6">Créer un compte</h2>
+
+                    <form className="flex flex-col gap-4">
+                        {/* Nom et Prénoms */}
+                        <div>
+                            <label htmlFor="nomprenom" className="block text-sm font-bold mb-1">
+                                Nom et Prénoms
+                            </label>
+                            <AuthInput
+                                type="text"
+                                name="nomprenom"
+                                id="nomprenom"
+                                placeholder=""
+                            />
+                        </div>
+
+                        {/* Email */}
+                        <div>
+                            <label htmlFor="email" className="block text-sm font-bold mb-1">
+                                Email
+                            </label>
+                            <AuthInput
+                                type="email"
+                                name="email"
+                                id="email"
+                                placeholder=""
+                            />
+                        </div>
+
+                        {/* Mot de passe */}
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-bold mb-1">
+                                Mot de passe
+                            </label>
+                            <AuthInput 
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder=""
+                            />
+                            <p className="text-xs text-gray-600 mt-1">
+                                Le mot de passe doit contenir au moins 6 caractères
+                            </p>
+                        </div>
+
+                        {/* Bouton S'inscrire */}
+                        <button
+                            type="submit"
+                            className="w-full py-2 bg-gradient-to-b from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 rounded-md text-sm font-medium transition-all duration-200 border border-amber-600 mt-2"
+                        >
+                            Créer votre compte
+                        </button>
+
+                        <p className="text-xs text-gray-600 mt-2">
+                            En créant un compte, vous acceptez les{' '}
+                            <a href="#" className="text-blue-600 hover:text-amber-600 hover:underline">
+                                Conditions d'utilisation
+                            </a>{' '}
+                            et la{' '}
+                            <a href="#" className="text-blue-600 hover:text-amber-600 hover:underline">
+                                Politique de confidentialité
+                            </a>{' '}
+                            de WestAf.
+                        </p>
+                    </form>
+
+                    {/* Séparateur */}
+                    <div className="relative my-6">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                            <span className="px-2 bg-white text-gray-500">ou</span>
+                        </div>
+                    </div>
+
+                    {/* Bouton Commander en tant qu'invité */}
+                    <Link
+                        to="/checkout"
+                        className="block w-full py-2 bg-white hover:bg-gray-50 text-gray-900 rounded-md text-sm font-medium transition-all duration-200 border border-gray-300 text-center"
+                    >
+                        Commander en tant qu'invité
+                    </Link>
                 </div>
-
-                {/* Bouton Submit */}
-                <button
-                    type="submit"
-                    className={`py-3 bg-[#000000e9] text-white rounded-md text-lg font-bold hover:bg-[#000000] transition-colors duration-200 md:text-xl md:py-4`}
-                >
-                    S'inscrire
-                </button>
-
-                <div className='bg-gray-200 h-[1px] w-[90%] self-center'></div>
-
-                {/* Bouton Google */}
-                <button
-                    type="button"
-                    className={`py-3 px-5 bg-[#000000e9] text-white rounded-full flex items-center justify-center font-medium gap-4 hover:bg-[#000000] transition-colors duration-200 md:text-lg md:py-4`}
-                >
-                    <img 
-                        className="w-9" 
-                        src={Google} 
-                        alt="Icone de Google" 
-                    />
-                    S'inscrire avec Google 
-                </button>
 
                 {/* Lien vers connexion */}
-                <p className="text-[#ffffffcc] mt-4">
-                    Déjà un compte ?{' '}
-                    <Link 
-                        to="/connexion" 
-                        className={`text-[#ffffff] font-semibold underline hover:text-[#eeeeee]`}
-                    >
-                        Connectez-vous
-                    </Link>
-                </p>
-            </form>
+                <div className="mt-6 text-center">
+                    <p className="text-sm text-gray-600">
+                        Déjà un compte ?{' '}
+                        <Link 
+                            to="/connexion" 
+                            className="text-blue-600 hover:text-amber-600 hover:underline font-medium"
+                        >
+                            Se connecter
+                        </Link>
+                    </p>
+                </div>
+            </div>
         </div>        
     )
 }

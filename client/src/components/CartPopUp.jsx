@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes, faShoppingBag } from "@fortawesome/free-solid-svg-icons"
-import VictusImageOne from "../assets/img/ProductCard/VictusImageOne.jpg"
-import VictusImageSecond from "../assets/img/ProductCard/VictusImageTwo.jpg"
 import { Link } from "react-router-dom"
+import { useCart } from "../context/CartContext"
 
 /**
  * Composant CartPopUp - Panier latéral en overlay
@@ -10,44 +9,21 @@ import { Link } from "react-router-dom"
  * @param {Object} props
  * @param {boolean} props.isOpen - Contrôle l'affichage du popup
  * @param {Function} props.onClose - Fonction pour fermer le popup
- * @param {Array} props.cartItems - Tableau des articles dans le panier
  * 
  * @example
- * <CartPopUp isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cartItems={items} />
+ * <CartPopUp isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
  */
-export default function CartPopUp({ isOpen, onClose, cartItems = [] }) {
-    // Données de test (à remplacer par les vraies données du panier)
-    const defaultItems = [
-        {
-            id: 1,
-            name: "HP Victus Laptop",
-            price: 300000.00,
-            quantity: 1,
-            image: VictusImageOne
-        },
-        {
-            id: 2,
-            name: "HP Victus Laptop",
-            price: 400000.00,
-            quantity: 1,
-            image: VictusImageSecond
-        }
-    ]
+export default function CartPopUp({ isOpen, onClose }) {
+    // Récupération des données et fonctions du contexte global
+    const { cartItems, removeFromCart, getCartTotal } = useCart()
 
-    // Ici, items prends le contenu de cartItems si non vide, sinon defaultItems (cartItems et defaultItems étant des tableaux d'objets articles)
-    const items = cartItems.length > 0 ? cartItems : defaultItems 
-
-
-    // Ici, subtotal calcule le total des prix * quantités des articles dans le panier
-    const subtotal = items.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-    // 1: 0 + (300000.00 * 1)
-    // 2: 300000.00 + (400000.00 * 1) = 700000.00
-
+    // Calculer le subtotal depuis le contexte
+    const subtotal = getCartTotal()
 
     // Fonction pour supprimer un article
     const handleRemoveItem = (itemId) => {
-        console.log("Remove item:", itemId)
-        // TODO: Implémenter la logique de suppression (DeadLine le 19.10.2025)
+        removeFromCart(itemId)
+        console.log(`Article ${itemId} supprimé du panier`)
     }
 
     // Fonction pour formater le prix
@@ -90,7 +66,7 @@ export default function CartPopUp({ isOpen, onClose, cartItems = [] }) {
                 {/* Liste des articles
                 Si le panier est vide, alors on affiche un message : Votre Panier est vide */}
                 <div className="flex-1 overflow-y-auto px-6 py-4 max-h-[calc(100vh-300px)]">
-                    {items.length === 0 ? (
+                    {cartItems.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-12 text-center">
                             <FontAwesomeIcon 
                                 icon={faShoppingBag} 
@@ -100,7 +76,7 @@ export default function CartPopUp({ isOpen, onClose, cartItems = [] }) {
                         </div>
                     ) : (
                         <div className="space-y-6">
-                            {items.map((item) => (
+                            {cartItems.map((item) => (
                                 <article 
                                     key={item.id}
                                     className="flex gap-4 items-start"

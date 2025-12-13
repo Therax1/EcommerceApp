@@ -4,8 +4,7 @@ export default function AuthInput({type, name, id, placeholder, value, onChange,
         <div>
             <input 
             className={` ${className ? className : ''}
-                w-full text-lg shadow-lg border-gray-400 px-5 py-3 rounded-sm outline-none transition-all bg-[#ffffff2e] focus:ring-gray-100 focus:ring-1
-                md:py-4 md:px-6
+                w-full text-sm px-3 py-2 rounded border border-gray-300 outline-none transition-all bg-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500
             `}
             
             type={type}
