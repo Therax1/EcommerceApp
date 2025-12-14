@@ -1,8 +1,53 @@
 import AuthInput from '../components/AuthInput'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 export default function Inscription() {
-    
+    const navigate = useNavigate()
+    const [formData, setFormData] = useState({
+        nom_prenom: '',
+        email: '',
+        password: ''
+    })
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+        setError('')
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setError('')
+        setLoading(true)
+
+        try {
+            const response = await fetch('http://localhost:8000/api/auth/inscription', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+
+            const data = await response.json()
+
+            if (response.ok) {
+                alert('Compte créé avec succès ! Vous pouvez maintenant vous connecter.')
+                navigate('/connexion')
+            } else {
+                setError(data.detail || 'Une erreur est survenue')
+            }
+        } catch (err) {
+            setError('Impossible de se connecter au serveur. Vérifiez que le backend est lancé.')
+        } finally {
+            setLoading(false)
+        }
+    }
 
     return (
         <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
@@ -17,17 +62,26 @@ export default function Inscription() {
                 <div className="bg-white border border-gray-300 rounded-lg p-8">
                     <h2 className="text-2xl font-normal mb-6">Créer un compte</h2>
 
-                    <form className="flex flex-col gap-4">
+                    {error && (
+                        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded text-sm">
+                            {error}
+                        </div>
+                    )}
+
+                    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                         {/* Nom et Prénoms */}
                         <div>
-                            <label htmlFor="nomprenom" className="block text-sm font-bold mb-1">
+                            <label htmlFor="nom_prenom" className="block text-sm font-bold mb-1">
                                 Nom et Prénoms
                             </label>
                             <AuthInput
                                 type="text"
-                                name="nomprenom"
-                                id="nomprenom"
+                                name="nom_prenom"
+                                id="nom_prenom"
                                 placeholder=""
+                                value={formData.nom_prenom}
+                                onChange={handleChange}
+                                required
                             />
                         </div>
 
@@ -41,6 +95,9 @@ export default function Inscription() {
                                 name="email"
                                 id="email"
                                 placeholder=""
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
                             />
                         </div>
 
@@ -54,6 +111,9 @@ export default function Inscription() {
                                 name="password"
                                 id="password"
                                 placeholder=""
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
                             />
                             <p className="text-xs text-gray-600 mt-1">
                                 Le mot de passe doit contenir au moins 6 caractères
@@ -63,9 +123,10 @@ export default function Inscription() {
                         {/* Bouton S'inscrire */}
                         <button
                             type="submit"
-                            className="w-full py-2 bg-gradient-to-b from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 rounded-md text-sm font-medium transition-all duration-200 border border-amber-600 mt-2"
+                            disabled={loading}
+                            className="w-full py-2 bg-gradient-to-b from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 rounded-md text-sm font-medium transition-all duration-200 border border-amber-600 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            Créer votre compte
+                            {loading ? 'Création en cours...' : 'Créer votre compte'}
                         </button>
 
                         <p className="text-xs text-gray-600 mt-2">

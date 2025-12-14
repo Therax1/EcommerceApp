@@ -1,3 +1,13 @@
+# ==========================================
+# NODE.JS / REACT (CLIENT)
+# ==========================================
+node_modules/
+dist/
+dist-ssr/
+*.local
+.cache/
+.parcel-cache/
+
 # Logs
 logs
 *.log
@@ -7,18 +17,170 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Build outputs
+build/
+.next/
+out/
 
-# Editor directories and files
+# Testing
+coverage/
+.nyc_output/
+
+# ==========================================
+# PYTHON / FASTAPI (SERVER)
+# ==========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+venv_fastapi/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# pytest
+.pytest_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# ==========================================
+# BASES DE DONNÉES
+# ==========================================
+*.db
+*.sqlite
+*.sqlite3
+westafecom.db
+
+# ==========================================
+# ENVIRONNEMENT / SECRETS
+# ==========================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+.secrets/
+
+# ==========================================
+# IDE / ÉDITEURS
+# ==========================================
+# VSCode
 .vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 !.vscode/extensions.json
-.idea
+*.code-workspace
+
+# JetBrains (PyCharm, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ==========================================
+# SYSTÈME D'EXPLOITATION
+# ==========================================
+# macOS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+
+# ==========================================
+# AUTRES
+# ==========================================
+# Backups
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Documentation générée
+docs/_build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Temporary files
+tmp/
+temp/
