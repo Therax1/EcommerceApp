@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     # API
-    API_V1_PREFIX: str = "/api/v1"
+    API_V1_PREFIX: str = "/api"
     PROJECT_NAME: str = "WestAf E-Commerce API"
     
     # Database
