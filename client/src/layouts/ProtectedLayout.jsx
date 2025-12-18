@@ -1,19 +1,28 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { AUTH_ROUTES } from '../routes/routes.config'
+import { useAuth } from '../context/AuthContext'
 
 /**
  * Layout pour les routes protégées
  * Redirige vers login si non authentifié
- * 
- * TODO: Remplacer isAuthenticated par la vraie logique d'auth (Context/Redux)
  */
 export default function ProtectedLayout() {
-    // Pour l'instant, simulation
-    // TODO: Récupérer depuis AuthContext ou localStorage
-    const isAuthenticated = localStorage.getItem('authToken') !== null
+    const { isAuthenticated, loading } = useAuth()
+    
+    // Afficher un loader pendant la vérification de l'authentification
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
+                    <p className="mt-4 text-gray-600">Chargement...</p>
+                </div>
+            </div>
+        )
+    }
     
     // Si non authentifié, rediriger vers login
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
         return <Navigate to={AUTH_ROUTES.LOGIN} replace />
     }
     

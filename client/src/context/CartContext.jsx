@@ -1,6 +1,4 @@
 import { createContext, useContext, useState } from 'react'
-import VictusImageOne from "../assets/img/ProductCard/VictusImageOne.jpg"
-import VictusImageSecond from "../assets/img/ProductCard/VictusImageTwo.jpg"
 
 /**
  * Context pour gérer l'état global du panier
@@ -26,25 +24,8 @@ export const useCart = () => {
  * @param {React.ReactNode} props.children - Composants enfants
  */
 export const CartProvider = ({ children }) => {
-    // Données de test initiales (à remplacer par les vraies données)
-    const initialItems = [
-        {
-            id: 1,
-            name: "HP Victus Laptop",
-            price: 300000.00,
-            quantity: 1,
-            image: VictusImageOne
-        },
-        {
-            id: 2,
-            name: "HP Victus Laptop",
-            price: 400000.00,
-            quantity: 1,
-            image: VictusImageSecond
-        }
-    ]
-
-    const [cartItems, setCartItems] = useState(initialItems)
+    // Panier initialement vide
+    const [cartItems, setCartItems] = useState([])
 
     /**
      * Ajouter un article au panier

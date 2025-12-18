@@ -14,6 +14,9 @@ import ContactUs from './pages/ContactUs'
 // Pages d'authentification
 import Connexion from './auth/Connexion'
 import Inscription from './auth/Inscription'
+import ForgotPassword from './auth/ForgotPassword'
+import VerifyCode from './auth/VerifyCode'
+import ResetPassword from './auth/ResetPassword'
 
 // Pages protégées
 import Cart from './pages/Cart'
@@ -49,10 +52,9 @@ export default function App() {
             <Route element={<AuthLayout />}>
                 <Route path={AUTH_ROUTES.LOGIN} element={<Connexion />} />
                 <Route path={AUTH_ROUTES.REGISTER} element={<Inscription />} />
-                
-                {/* TODO: Ajouter récupération mot de passe */}
-                {/* <Route path={AUTH_ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} /> */}
-                {/* <Route path={AUTH_ROUTES.RESET_PASSWORD} element={<ResetPassword />} /> */}
+                <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
+                <Route path="/verify-code" element={<VerifyCode />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
             </Route>
 
             {/* ========== ROUTES PROTÉGÉES (nécessitent authentification) ========== */}

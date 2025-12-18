@@ -4,8 +4,8 @@ from sqlalchemy.exc import IntegrityError
 
 from app.db.database import get_db
 from app.db.models import User
-from app.schemas.user import UserCreate, UserResponse, UserLogin
-from app.core.security import hash_password, verify_password
+from app.schemas.user import UserCreate, UserResponse, UserLogin, LoginResponse
+from app.core.security import hash_password, verify_password, create_access_token
 
 router = APIRouter()
 
@@ -40,10 +40,10 @@ def inscription(user_data: UserCreate, db: Session = Depends(get_db)):
             detail="Erreur lors de la création du compte"
         )
 
-@router.post("/connexion")
+@router.post("/connexion", response_model=LoginResponse)
 def connexion(user_data: UserLogin, db: Session = Depends(get_db)):
     """
-    Connecter un utilisateur
+    Connecter un utilisateur et retourner un token JWT
     """
     # Rechercher l'utilisateur par email
     user = db.query(User).filter(User.email == user_data.email).first()
@@ -61,11 +61,11 @@ def connexion(user_data: UserLogin, db: Session = Depends(get_db)):
             detail="Email ou mot de passe incorrect"
         )
     
+    # Créer le token JWT
+    access_token = create_access_token(data={"sub": user.email, "user_id": user.id})
+    
     return {
-        "message": "Connexion réussie",
-        "user": {
-            "id": user.id,
-            "nom_prenom": user.nom_prenom,
-            "email": user.email
-        }
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user": user
     }

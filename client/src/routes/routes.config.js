@@ -17,8 +17,8 @@ export const PUBLIC_ROUTES = {
 
 // Routes d'authentification
 export const AUTH_ROUTES = {
-  LOGIN: '/login',
-  REGISTER: '/register',
+  LOGIN: '/connexion',
+  REGISTER: '/inscription',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password/:token',
   VERIFY_EMAIL: '/verify-email/:token',

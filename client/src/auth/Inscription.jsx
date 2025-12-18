@@ -1,9 +1,11 @@
 import AuthInput from '../components/AuthInput'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
 
 export default function Inscription() {
     const navigate = useNavigate()
+    const { register } = useAuth()
     const [formData, setFormData] = useState({
         nom_prenom: '',
         email: '',
@@ -26,24 +28,16 @@ export default function Inscription() {
         setLoading(true)
 
         try {
-            const response = await fetch('http://localhost:8000/api/auth/inscription', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-
-            const data = await response.json()
-
-            if (response.ok) {
-                alert('Compte créé avec succès ! Vous pouvez maintenant vous connecter.')
-                navigate('/connexion')
+            const result = await register(formData.nom_prenom, formData.email, formData.password)
+            
+            if (result.success) {
+                // Redirection automatique vers la page d'accueil après inscription
+                navigate('/')
             } else {
-                setError(data.detail || 'Une erreur est survenue')
+                setError(result.error)
             }
         } catch (err) {
-            setError('Impossible de se connecter au serveur. Vérifiez que le backend est lancé.')
+            setError('Une erreur inattendue s\'est produite')
         } finally {
             setLoading(false)
         }

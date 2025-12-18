@@ -33,3 +33,9 @@ class UserLogin(BaseModel):
     """Schéma pour la connexion"""
     email: EmailStr
     password: str
+
+class LoginResponse(BaseModel):
+    """Schéma pour la réponse de connexion"""
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse
